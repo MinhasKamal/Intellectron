@@ -4,7 +4,7 @@
 * License:  GNU General Public License version-3           *
 ***********************************************************/
 
-package com.minhaskamal.neuralnetwork.neuron;
+package com.minhaskamal.intellectron.neuralnetwork.neuron;
 
 import java.util.Random;
 
@@ -20,11 +20,15 @@ public class Dendrite {
 	}
 	
 	public double catchSignal(double signal){
-		return signal*weight;
+		return signal*this.weight;
 	}
 	
 	public void updateWeight(double corectionRate){
-		weight += corectionRate;
+		this.weight += corectionRate;
+	}
+	
+	public double getWeight(){
+		return this.weight;
 	}
 	
 	public String toString(){

@@ -4,13 +4,12 @@
 * License:  GNU General Public License version-3           *
 ***********************************************************/
 
-package com.minhaskamal.neuralnetwork.neuron;
+package com.minhaskamal.intellectron.neuralnetwork.neuron;
 
 import java.util.LinkedList;
 
 public class Neuron {
 	private LinkedList<Dendrite> dendrites;
-	private double outputSignal;
 	
 	public Neuron(LinkedList<Dendrite> dendrites) {
 		this.dendrites = dendrites;
@@ -20,28 +19,40 @@ public class Neuron {
 		this(new LinkedList<Dendrite>());
 		
 		for(int i=0; i<numberOfDendrites; i++){
-			dendrites.add(new Dendrite());
+			this.dendrites.add(new Dendrite());
 		}
 	}
 	
-	public void processSignal(double[] inputSignals){	//feed forward
+	/**
+	 * feed forward - sigmoid
+	 * @param inputSignals
+	 * @return output of the process
+	 */
+	public double processSignal(double[] inputSignals){
 		double signalWeightSum = 0;
 		
 		for(int i=0; i<inputSignals.length; i++){
 			signalWeightSum += this.dendrites.get(i).catchSignal(inputSignals[i]);
 		}
 		
-		this.outputSignal = 1 / ( 1 + Math.exp(-signalWeightSum) );
+		double outputSignal = 1 / ( 1 + Math.exp(-signalWeightSum) );
+		
+		return outputSignal;
 	}
 	
+	/**
+	 * Resets all the weights of dendrites of a neuron
+	 * @param errorRate errorRate = - learningRate(eta) * delta
+	 * @param previousInputSignals
+	 */
 	public void learn(double errorRate, double[] previousInputSignals){
 		for(int i=0; i<previousInputSignals.length; i++){
 			this.dendrites.get(i).updateWeight(errorRate*previousInputSignals[i]);
 		}
 	}
 	
-	public double getOutput(){
-		return outputSignal;
+	public double getWeight(int dendriteNumber){
+		return this.dendrites.get(dendriteNumber).getWeight();
 	}
 	
 	public String toString(){
