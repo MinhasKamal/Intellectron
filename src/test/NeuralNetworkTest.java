@@ -10,7 +10,7 @@ import com.minhaskamal.intellectron.neuralnetwork.NeuralNetwork;
 
 public class NeuralNetworkTest {
 	public static void main(String[] args) {
-		int[] numbersOfNeuronsInLayers = new int[]{4, 2, 1};
+		int[] numbersOfNeuronsInLayers = new int[]{4, 1};
 		NeuralNetwork neuralNetwork = new NeuralNetwork(numbersOfNeuronsInLayers, 0.1, 2);
 		
 		//input only, bias is handled internally//
@@ -22,16 +22,16 @@ public class NeuralNetworkTest {
 		};
 		//output//
 		double[][] outputs = new double[][]{
+			{1},
 			{0},
-			{1},
-			{1},
-			{0}
+			{0},
+			{1}
 		};
 		
 		System.out.println(neuralNetwork.toString());
 		
 		//training
-		for(int cycle=0; cycle<100000; cycle++){
+		for(int cycle=0; cycle<50000; cycle++){
 			for(int i=0; i<inputs.length; i++){
 				
 				neuralNetwork.process(inputs[i]);

@@ -9,7 +9,10 @@ package com.minhaskamal.intellectron.neuralnetwork;
 import java.util.LinkedList;
 
 public class NeuralNetwork {
-	LinkedList<NeuronLayer> neuronLayers;
+	private LinkedList<NeuronLayer> neuronLayers;
+	//public String neuralNetworkName;
+	
+	private String NEURAL_NETWORK_TAG= "neural-network";
 	
 	/**
 	 * @param numbersOfNeuronsInLayers numbersOfNeuronsInLayers.length is the number of layers in the network, the last layer's 
@@ -82,13 +85,13 @@ public class NeuralNetwork {
 	}
 	
 	public String toString(){
-		String string = "<neural-network>\n";
+		String string = "<"+NEURAL_NETWORK_TAG+">\n";
 		
 		for(NeuronLayer neuronLayer: this.neuronLayers){
 			string += neuronLayer.toString()+"\n";
 		}
 		
-		string += "</neural-network>";
+		string += "</"+NEURAL_NETWORK_TAG+">";
 		
 		return string;
 	}

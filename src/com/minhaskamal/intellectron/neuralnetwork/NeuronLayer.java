@@ -15,6 +15,9 @@ public class NeuronLayer {
 	private double[] errors;
 	private double[] outputs;
 	
+	public static final String NEURON_LAYER_TAG = "neuron-layer";
+	public static final String LEARNING_RATE_TAG = "learning-rate";
+	
 	/**
 	 * 
 	 * @param numberOfNeurons
@@ -90,15 +93,15 @@ public class NeuronLayer {
 	}
 	
 	public String toString(){
-		String string = "<neuron-layer>\n";
+		String string = "<"+NEURON_LAYER_TAG+">\n";
 		
-		string+= "<learning-rate>"+this.learningRate+"</learning-rate>\n";
+		string+= "<"+LEARNING_RATE_TAG+">"+this.learningRate+"</"+LEARNING_RATE_TAG+">\n";
 		
 		for(Neuron neuron: this.neurons){
 			string += neuron.toString()+"\n";
 		}
 		
-		string += "</neuron-layer>";
+		string += "</"+NEURON_LAYER_TAG+">";
 		
 		return string;
 	}
