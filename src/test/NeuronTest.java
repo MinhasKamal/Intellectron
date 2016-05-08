@@ -27,22 +27,22 @@ public class NeuronTest {
 		};
 		//output//
 		double[] output = new double[]{
+			1,
 			0,
 			1,
-			1,
-			1
+			0
 		};
 		
 		//processing with gradient descent//
 		double error;
 		double learningRate = 1;
-		for(int cycle=0; cycle<100; cycle++){
+		for(int cycle=0; cycle<1000; cycle++){
 			for(int i=0; i<input.length; i++){
 				neuron.processSignal(input[i]);
 				
 				double o = neuron.getOutput();
 				
-				error = output[i]-o;
+				error = o*(1-o)*(output[i]-o);
 				neuron.learn(error*learningRate, input[i]);
 				
 				System.out.print(o + ", ");
