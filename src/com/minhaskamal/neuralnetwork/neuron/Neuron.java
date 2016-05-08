@@ -34,6 +34,12 @@ public class Neuron {
 		this.outputSignal = 1 / ( 1 + Math.exp(-signalWeightSum) );
 	}
 	
+	public void learn(double errorRate, double[] previousInputSignals){
+		for(int i=0; i<previousInputSignals.length; i++){
+			this.dendrites.get(i).updateWeight(errorRate*previousInputSignals[i]);
+		}
+	}
+	
 	public double getOutput(){
 		return outputSignal;
 	}

@@ -23,6 +23,10 @@ public class Dendrite {
 		return signal*weight;
 	}
 	
+	public void updateWeight(double corectionRate){
+		weight += corectionRate;
+	}
+	
 	public String toString(){
 		return "<weight>"+this.weight+"</weight>";
 	}
