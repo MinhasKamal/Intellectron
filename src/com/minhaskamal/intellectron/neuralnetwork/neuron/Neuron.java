@@ -68,7 +68,7 @@ public class Neuron {
 		
 		String[] weightStrings = string.substring(startIndex, stopIndex).split("\n");
 		
-		dendrites = new LinkedList<Dendrite>();
+		this.dendrites = new LinkedList<Dendrite>();
 		for(int i=0; i<weightStrings.length; i++){
 			this.dendrites.add(new Dendrite(weightStrings[i]));
 		}

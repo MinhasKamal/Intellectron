@@ -41,6 +41,10 @@ public class NeuronLayer {
 		this(numberOfNeurons, previousNeuronLayer.neurons.size(), learningRate);
 	}
 	
+	public NeuronLayer(String string) {
+		load(string);
+	}
+	
 	///////////////////////////////PROCESS//////////////////////////////////
 	
 	public void process(double[] inputs){
@@ -89,6 +93,21 @@ public class NeuronLayer {
 		for(Neuron neuron: this.neurons){
 			neuron.learn(this.errors[i]*this.learningRate, previousInputSignals);
 			i++;
+		}
+	}
+	
+	//////////////////////////////KNOWLEDGE LOAD-STORE/////////////////////////////////
+	//TODO not workable
+	private void load(String string){
+		int startIndex = string.indexOf(NEURON_LAYER_TAG);
+		startIndex = string.indexOf('>', startIndex+NEURON_LAYER_TAG.length()) + 1 + 1;
+		int stopIndex = string.indexOf("</"+NEURON_LAYER_TAG, startIndex);
+		
+		String[] neuronStrings = string.substring(startIndex, stopIndex).split("\n");
+		
+		this.neurons = new LinkedList<Neuron>();
+		for(int i=0; i<neuronStrings.length; i++){
+			this.neurons.add(new Neuron(neuronStrings[i]));
 		}
 	}
 	

@@ -37,6 +37,10 @@ public class NeuralNetwork {
 		}
 	}
 	
+	public NeuralNetwork(String string) {
+		load(string);
+	}
+	
 	///////////////////////////////PROCESS//////////////////////////////////
 	
 	public void process(double[] inputs){
@@ -48,9 +52,21 @@ public class NeuralNetwork {
 		}
 	}
 	
-	//output includes bias
+	/**
+	 * @return does not includes bias
+	 */
 	public double[] getOutputs(){
-		return neuronLayers.getLast().getOutputs();
+		return removeBias(neuronLayers.getLast().getOutputs());
+	}
+	
+	private double[] removeBias(double[] outputs){
+		double[] outputsWithoutBias = new double[outputs.length-1];
+		
+		for(int i=0; i<outputsWithoutBias.length; i++){
+			outputsWithoutBias[i] = outputs[i];
+		}
+		
+		return outputsWithoutBias;
 	}
 	
 	/////////////////////////////ERROR CALCULATION///////////////////////////////
@@ -60,6 +76,10 @@ public class NeuralNetwork {
 		for(int i=this.neuronLayers.size()-1; i>0; i--){
 			this.neuronLayers.get(i-1).calculateErrors(this.neuronLayers.get(i)); //calculate error of i layer
 		}
+	}
+	
+	public double[] getErrors(){
+		return this.neuronLayers.getLast().getErrors();
 	}
 	
 	/////////////////////////////LEARN///////////////////////////////
@@ -82,6 +102,21 @@ public class NeuralNetwork {
 		inputsWithBias[inputsWithBias.length-1] = 1;
 		
 		return inputsWithBias;
+	}
+	
+	//////////////////////////////KNOWLEDGE LOAD-STORE/////////////////////////////////
+	//TODO not workable
+	private void load(String string){
+		int startIndex = string.indexOf(NEURAL_NETWORK_TAG);
+		startIndex = string.indexOf('>', startIndex+NEURAL_NETWORK_TAG.length()) + 1 + 1;
+		int stopIndex = string.indexOf("</"+NEURAL_NETWORK_TAG, startIndex);
+		
+		String[] neuronStrings = string.substring(startIndex, stopIndex).split("\n");
+		
+		this.neuronLayers = new LinkedList<NeuronLayer>();
+		for(int i=0; i<neuronStrings.length; i++){
+			this.neuronLayers.add(new NeuronLayer(neuronStrings[i]));
+		}
 	}
 	
 	public String toString(){
