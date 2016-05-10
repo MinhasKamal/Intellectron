@@ -1,5 +1,13 @@
 package com.minhaskamal.intellectron;
 
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.minhaskamal.intellectron.neuralnetwork.NeuralNetwork;
 import com.minhaskamal.intellectron.util.FileIO;
 
@@ -13,7 +21,10 @@ public class NeuralNetworkImplementation {
 	
 	public NeuralNetworkImplementation(String filePath) {
 		try {
-			this.neuralNetwork = new NeuralNetwork(FileIO.readWholeFile(filePath));
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(filePath));
+			NodeList nodeList = document.getElementsByTagName("neural-network");
+	        Node neuralNetworkNode = nodeList.item(0);
+			this.neuralNetwork = new NeuralNetwork(neuralNetworkNode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

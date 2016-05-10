@@ -17,10 +17,6 @@ public class Dendrite {
 		this.weight = weight;
 	}
 	
-	public Dendrite(String string) {
-		load(string);
-	}
-	
 	/**
 	 * randomly generates weight between -0.5 & 0.5
 	 */
@@ -38,14 +34,6 @@ public class Dendrite {
 	
 	public double getWeight(){
 		return this.weight;
-	}
-	
-	private void load(String string){
-		int startIndex = string.indexOf(WEIGHT_TAG);//ensure tag
-		startIndex = string.indexOf('>', startIndex+WEIGHT_TAG.length()) + 1;
-		int stopIndex = string.indexOf("</"+WEIGHT_TAG, startIndex);
-		
-		this.weight = Double.parseDouble(string.substring(startIndex, stopIndex));
 	}
 	
 	public String toString(){

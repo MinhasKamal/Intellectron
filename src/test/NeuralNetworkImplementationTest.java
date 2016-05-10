@@ -27,7 +27,12 @@ public class NeuralNetworkImplementationTest {
 			neuralNetworkImplementation.train(inputs, outputs);
 		}
 		
-		double accuracy = neuralNetworkImplementation.test(inputs, outputs);
+		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
+		neuralNetworkImplementation.dump(workspace+"knowledge.xml");
+		
+		//another NeuralNetworkImplementation//
+		NeuralNetworkImplementation neuralNetworkImplementation2 = new NeuralNetworkImplementation(workspace+"knowledge.xml");
+		double accuracy = neuralNetworkImplementation2.test(inputs, outputs);
 		System.out.println(accuracy);
 	}
 }

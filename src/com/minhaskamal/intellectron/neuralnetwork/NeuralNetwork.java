@@ -7,12 +7,14 @@
 package com.minhaskamal.intellectron.neuralnetwork;
 
 import java.util.LinkedList;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class NeuralNetwork {
 	private LinkedList<NeuronLayer> neuronLayers;
 	//public String neuralNetworkName;
 	
-	private String NEURAL_NETWORK_TAG= "neural-network";
+	public static String NEURAL_NETWORK_TAG= "neural-network";
 	
 	/**
 	 * @param numbersOfNeuronsInLayers numbersOfNeuronsInLayers.length is the number of layers in the network, the last layer's 
@@ -37,8 +39,23 @@ public class NeuralNetwork {
 		}
 	}
 	
-	public NeuralNetwork(String string) {
-		load(string);
+	public NeuralNetwork(Node neuralNetworkNode) {
+		/*if(neuralNetworkNode.getNodeName()!=NeuralNetwork.NEURAL_NETWORK_TAG) {
+			return;
+		}*/
+		this.neuronLayers = new LinkedList<NeuronLayer>();
+		
+		NodeList neuronLayerNodeList = neuralNetworkNode.getChildNodes();
+		System.out.println(neuronLayerNodeList.getLength());
+		for(int i=0; i<neuronLayerNodeList.getLength(); i++){
+			//TODO
+		}
+		for(int i=0; i<neuronLayerNodeList.getLength(); i++){
+			Node neuronLayerNode = neuronLayerNodeList.item(i);
+			if(neuronLayerNode.getNodeName()==NeuronLayer.NEURON_LAYER_TAG){
+				this.neuronLayers.add(new NeuronLayer(neuronLayerNode));
+			}
+		}
 	}
 	
 	///////////////////////////////PROCESS//////////////////////////////////
@@ -104,20 +121,7 @@ public class NeuralNetwork {
 		return inputsWithBias;
 	}
 	
-	//////////////////////////////KNOWLEDGE LOAD-STORE/////////////////////////////////
-	//TODO not workable
-	private void load(String string){
-		int startIndex = string.indexOf(NEURAL_NETWORK_TAG);
-		startIndex = string.indexOf('>', startIndex+NEURAL_NETWORK_TAG.length()) + 1 + 1;
-		int stopIndex = string.indexOf("</"+NEURAL_NETWORK_TAG, startIndex);
-		
-		String[] neuronStrings = string.substring(startIndex, stopIndex).split("\n");
-		
-		this.neuronLayers = new LinkedList<NeuronLayer>();
-		for(int i=0; i<neuronStrings.length; i++){
-			this.neuronLayers.add(new NeuronLayer(neuronStrings[i]));
-		}
-	}
+	//////////////////////////////KNOWLEDGE STORE/////////////////////////////////
 	
 	public String toString(){
 		String string = "<"+NEURAL_NETWORK_TAG+">\n";

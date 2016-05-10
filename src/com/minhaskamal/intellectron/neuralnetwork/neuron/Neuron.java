@@ -8,6 +8,9 @@ package com.minhaskamal.intellectron.neuralnetwork.neuron;
 
 import java.util.LinkedList;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 public class Neuron {
 	private LinkedList<Dendrite> dendrites;
 	
@@ -17,8 +20,17 @@ public class Neuron {
 		this.dendrites = dendrites;
 	}
 	
-	public Neuron(String string) {
-		load(string);
+	public Neuron(Node neuronNode) {
+		this.dendrites = new LinkedList<Dendrite>();
+		
+		NodeList dendriteNodeList = neuronNode.getChildNodes();
+		
+		for(int i=0; i<dendriteNodeList.getLength(); i++){
+			Node dendriteNode = dendriteNodeList.item(i);
+			if(dendriteNode.getNodeName()==Dendrite.WEIGHT_TAG){
+				this.dendrites.add(new Dendrite(Double.parseDouble(dendriteNode.getTextContent())));
+			}
+		}
 	}
 	
 	public Neuron(int numberOfDendrites) {
@@ -59,19 +71,6 @@ public class Neuron {
 	
 	public double getWeight(int dendriteNumber){
 		return this.dendrites.get(dendriteNumber).getWeight();
-	}
-	
-	private void load(String string){
-		int startIndex = string.indexOf(NEURON_TAG);
-		startIndex = string.indexOf('>', startIndex+NEURON_TAG.length()) + 1 + 1;
-		int stopIndex = string.indexOf("</"+NEURON_TAG, startIndex);
-		
-		String[] weightStrings = string.substring(startIndex, stopIndex).split("\n");
-		
-		this.dendrites = new LinkedList<Dendrite>();
-		for(int i=0; i<weightStrings.length; i++){
-			this.dendrites.add(new Dendrite(weightStrings[i]));
-		}
 	}
 	
 	public String toString(){
