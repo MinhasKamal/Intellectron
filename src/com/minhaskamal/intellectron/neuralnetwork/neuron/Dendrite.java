@@ -36,7 +36,7 @@ public class Dendrite {
 		return this.weight;
 	}
 	
-	public String toString(){
+	public String dump(){
 		return "<"+WEIGHT_TAG+">"+this.weight+"</"+WEIGHT_TAG+">";
 	}
 }

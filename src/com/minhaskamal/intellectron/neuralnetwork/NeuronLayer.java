@@ -45,19 +45,16 @@ public class NeuronLayer {
 	}
 	
 	public NeuronLayer(Node neuronLayerNode) {
-		/*if(neuronLayerNode.getNodeName()!=NeuronLayer.NEURON_LAYER_TAG) {
-			return;
-		}*/
 		this.neurons = new LinkedList<Neuron>();
 		
 		NodeList neuronNodeList = neuronLayerNode.getChildNodes();
-		
-		System.out.println(neuronNodeList.item(1).getNodeName()+"-"+neuronNodeList.item(1).getTextContent());
-		if(neuronNodeList.item(1).getNodeName()==NeuronLayer.LEARNING_RATE_TAG){
-			System.out.println("WOW!!!");
-			this.learningRate = Double.parseDouble(neuronNodeList.item(1).getTextContent());
+		for(int i=0; i<neuronNodeList.getLength(); i++){
+			if(neuronNodeList.item(i).getNodeName()==NeuronLayer.LEARNING_RATE_TAG){
+				this.learningRate = Double.parseDouble(neuronNodeList.item(i).getTextContent());
+				break;
+			}
 		}
-		for(int i=1; i<neuronNodeList.getLength(); i++){
+		for(int i=0; i<neuronNodeList.getLength(); i++){
 			Node neuronNode = neuronNodeList.item(i);
 			if(neuronNode.getNodeName()==Neuron.NEURON_TAG){
 				this.neurons.add(new Neuron(neuronNode));
@@ -121,13 +118,13 @@ public class NeuronLayer {
 	
 	//////////////////////////////KNOWLEDGE STORE/////////////////////////////////
 	
-	public String toString(){
+	public String dump(){
 		String string = "<"+NEURON_LAYER_TAG+">\n";
 		
 		string+= "<"+LEARNING_RATE_TAG+">"+this.learningRate+"</"+LEARNING_RATE_TAG+">\n";
 		
 		for(Neuron neuron: this.neurons){
-			string += neuron.toString()+"\n";
+			string += neuron.dump()+"\n";
 		}
 		
 		string += "</"+NEURON_LAYER_TAG+">";

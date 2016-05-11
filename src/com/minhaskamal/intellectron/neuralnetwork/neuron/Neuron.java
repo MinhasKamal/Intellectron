@@ -24,7 +24,6 @@ public class Neuron {
 		this.dendrites = new LinkedList<Dendrite>();
 		
 		NodeList dendriteNodeList = neuronNode.getChildNodes();
-		
 		for(int i=0; i<dendriteNodeList.getLength(); i++){
 			Node dendriteNode = dendriteNodeList.item(i);
 			if(dendriteNode.getNodeName()==Dendrite.WEIGHT_TAG){
@@ -73,11 +72,11 @@ public class Neuron {
 		return this.dendrites.get(dendriteNumber).getWeight();
 	}
 	
-	public String toString(){
+	public String dump(){
 		String string = "<"+NEURON_TAG+">\n";
 		
 		for(Dendrite dendrite: this.dendrites){
-			string += dendrite.toString()+"\n";
+			string += dendrite.dump()+"\n";
 		}
 		
 		string += "</"+NEURON_TAG+">";

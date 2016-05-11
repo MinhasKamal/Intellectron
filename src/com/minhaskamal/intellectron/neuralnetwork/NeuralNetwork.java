@@ -40,16 +40,9 @@ public class NeuralNetwork {
 	}
 	
 	public NeuralNetwork(Node neuralNetworkNode) {
-		/*if(neuralNetworkNode.getNodeName()!=NeuralNetwork.NEURAL_NETWORK_TAG) {
-			return;
-		}*/
 		this.neuronLayers = new LinkedList<NeuronLayer>();
 		
 		NodeList neuronLayerNodeList = neuralNetworkNode.getChildNodes();
-		System.out.println(neuronLayerNodeList.getLength());
-		for(int i=0; i<neuronLayerNodeList.getLength(); i++){
-			//TODO
-		}
 		for(int i=0; i<neuronLayerNodeList.getLength(); i++){
 			Node neuronLayerNode = neuronLayerNodeList.item(i);
 			if(neuronLayerNode.getNodeName()==NeuronLayer.NEURON_LAYER_TAG){
@@ -123,11 +116,11 @@ public class NeuralNetwork {
 	
 	//////////////////////////////KNOWLEDGE STORE/////////////////////////////////
 	
-	public String toString(){
+	public String dump(){
 		String string = "<"+NEURAL_NETWORK_TAG+">\n";
 		
 		for(NeuronLayer neuronLayer: this.neuronLayers){
-			string += neuronLayer.toString()+"\n";
+			string += neuronLayer.dump()+"\n";
 		}
 		
 		string += "</"+NEURAL_NETWORK_TAG+">";

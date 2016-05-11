@@ -22,7 +22,7 @@ public class NeuralNetworkImplementation {
 	public NeuralNetworkImplementation(String filePath) {
 		try {
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(filePath));
-			NodeList nodeList = document.getElementsByTagName("neural-network");
+			NodeList nodeList = document.getElementsByTagName(NeuralNetwork.NEURAL_NETWORK_TAG);
 	        Node neuralNetworkNode = nodeList.item(0);
 			this.neuralNetwork = new NeuralNetwork(neuralNetworkNode);
 		} catch (Exception e) {
@@ -32,7 +32,6 @@ public class NeuralNetworkImplementation {
 	
 	public void train(double[][] inputs, double[][] outputs){
 		for(int i=0; i<inputs.length; i++){
-			
 			this.neuralNetwork.process(inputs[i]);
 			this.neuralNetwork.calculateErrors(outputs[i]);
 			this.neuralNetwork.learn(inputs[i]);
@@ -74,7 +73,7 @@ public class NeuralNetworkImplementation {
 	
 	public void dump(String filePath){
 		try {
-			FileIO.writeWholeFile(filePath, this.neuralNetwork.toString());
+			FileIO.writeWholeFile(filePath, this.neuralNetwork.dump());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
