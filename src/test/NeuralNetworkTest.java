@@ -34,7 +34,7 @@ public class NeuralNetworkTest {
 		for(int cycle=0; cycle<50000; cycle++){
 			for(int i=0; i<inputs.length; i++){
 				
-				neuralNetwork.process(inputs[i]);
+				neuralNetwork.processForward(inputs[i]);
 				neuralNetwork.calculateErrors(outputs[i]);
 				neuralNetwork.learn(inputs[i]);
 				

@@ -28,6 +28,10 @@ public class Dendrite {
 		return signal*this.weight;
 	}
 	
+	public double throwSignal(double signal){
+		return signal/this.weight;
+	}
+	
 	public void updateWeight(double corection){
 		this.weight += corection;
 	}

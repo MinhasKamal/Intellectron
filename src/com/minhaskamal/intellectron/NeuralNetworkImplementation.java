@@ -32,7 +32,7 @@ public class NeuralNetworkImplementation {
 	
 	public void train(double[][] inputs, double[][] outputs){
 		for(int i=0; i<inputs.length; i++){
-			this.neuralNetwork.process(inputs[i]);
+			this.neuralNetwork.processForward(inputs[i]);
 			this.neuralNetwork.calculateErrors(outputs[i]);
 			this.neuralNetwork.learn(inputs[i]);
 		}
@@ -67,7 +67,7 @@ public class NeuralNetworkImplementation {
 	}
 	
 	public double[] predict(double[] input){
-		this.neuralNetwork.process(input);
+		this.neuralNetwork.processForward(input);
 		return neuralNetwork.getOutputs();
 	}
 	

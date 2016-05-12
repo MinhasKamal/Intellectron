@@ -33,7 +33,7 @@ public class NeuronTest {
 		double learningRate = 1;
 		for(int cycle=0; cycle<1000; cycle++){
 			for(int i=0; i<input.length; i++){
-				double o = neuron.processSignal(input[i]);
+				double o = neuron.processSignalForward(input[i]);
 				
 				error = o*(1-o)*(output[i]-o);
 				neuron.learn(error*learningRate, input[i]);

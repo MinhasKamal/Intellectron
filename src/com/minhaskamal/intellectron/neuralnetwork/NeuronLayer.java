@@ -67,15 +67,33 @@ public class NeuronLayer {
 	
 	///////////////////////////////PROCESS//////////////////////////////////
 	
-	public void process(double[] inputs){
+	public void processForward(double[] inputs){
 		for(int i=0; i<outputs.length-1; i++){
-			this.outputs[i] = neurons.get(i).processSignal(inputs);
+			this.outputs[i] = neurons.get(i).processSignalForward(inputs);
 		}
 		this.outputs[outputs.length-1] = 1;	//bias
 	}
 	
+	public double[] processBackward(){
+		double[] integratedGeneratedSignal = new double[this.neurons.get(0).getNumberOfDendrites()];
+		
+		double[] generatedSignals = new double[integratedGeneratedSignal.length];
+		for(int i=0; i<outputs.length-1; i++){ //excluding bias
+			generatedSignals = neurons.get(i).processSignalBackward(outputs[i]);
+			for(int j=0; j<integratedGeneratedSignal.length; j++){
+				integratedGeneratedSignal[i] += generatedSignals[i];
+			}
+		}
+		
+		return integratedGeneratedSignal;
+	}
+	
 	public double[] getOutputs(){
 		return this.outputs;
+	}
+	
+	public void setOutputs(double[] outputs){
+		this.outputs = outputs.clone();
 	}
 	
 	/////////////////////////////ERROR CALCULATION///////////////////////////////

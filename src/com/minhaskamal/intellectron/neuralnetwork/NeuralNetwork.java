@@ -53,13 +53,23 @@ public class NeuralNetwork {
 	
 	///////////////////////////////PROCESS//////////////////////////////////
 	
-	public void process(double[] inputs){
+	public void processForward(double[] inputs){
 		inputs = addBias(inputs);
 		
-		neuronLayers.getFirst().process(inputs);
+		neuronLayers.getFirst().processForward(inputs);
 		for(int i=1; i<neuronLayers.size(); i++){
-			neuronLayers.get(i).process(neuronLayers.get(i-1).getOutputs());
+			neuronLayers.get(i).processForward(neuronLayers.get(i-1).getOutputs());
 		}
+	}
+	
+	public double[] processBackward(double[] seed){
+		
+		neuronLayers.getLast().setOutputs(seed);
+		for(int i=neuronLayers.size()-1; i>0; i--){
+			neuronLayers.get(i-1).setOutputs(neuronLayers.get(i).processBackward());
+		}
+		
+		return neuronLayers.getFirst().processBackward();
 	}
 	
 	/**
@@ -67,16 +77,6 @@ public class NeuralNetwork {
 	 */
 	public double[] getOutputs(){
 		return removeBias(neuronLayers.getLast().getOutputs());
-	}
-	
-	private double[] removeBias(double[] outputs){
-		double[] outputsWithoutBias = new double[outputs.length-1];
-		
-		for(int i=0; i<outputsWithoutBias.length; i++){
-			outputsWithoutBias[i] = outputs[i];
-		}
-		
-		return outputsWithoutBias;
 	}
 	
 	/////////////////////////////ERROR CALCULATION///////////////////////////////
@@ -103,17 +103,6 @@ public class NeuralNetwork {
 		this.neuronLayers.getFirst().learn(inputs);
 	}
 	
-	private double[] addBias(double[] inputs){
-		double[] inputsWithBias = new double[inputs.length+1];
-		
-		for(int i=0; i<inputs.length; i++){
-			inputsWithBias[i] = inputs[i];
-		}
-		inputsWithBias[inputsWithBias.length-1] = 1;
-		
-		return inputsWithBias;
-	}
-	
 	//////////////////////////////KNOWLEDGE STORE/////////////////////////////////
 	
 	public String dump(){
@@ -126,5 +115,28 @@ public class NeuralNetwork {
 		string += "</"+NEURAL_NETWORK_TAG+">";
 		
 		return string;
+	}
+	
+	//////
+	
+	private double[] addBias(double[] inputs){
+		double[] inputsWithBias = new double[inputs.length+1];
+		
+		for(int i=0; i<inputs.length; i++){
+			inputsWithBias[i] = inputs[i];
+		}
+		inputsWithBias[inputsWithBias.length-1] = 1;
+		
+		return inputsWithBias;
+	}
+	
+	private double[] removeBias(double[] outputs){
+		double[] outputsWithoutBias = new double[outputs.length-1];
+		
+		for(int i=0; i<outputsWithoutBias.length; i++){
+			outputsWithoutBias[i] = outputs[i];
+		}
+		
+		return outputsWithoutBias;
 	}
 }

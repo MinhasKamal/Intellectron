@@ -13,7 +13,7 @@ public class NeuralLayerTest {
 		NeuronLayer neuronLayer = new NeuronLayer(3, 3, 0.1);
 		
 		double[] inputs = new double[]{0.3, 0.2, 0.99, 1};//last one is bias
-		neuronLayer.process(inputs);
+		neuronLayer.processForward(inputs);
 		
 		double[] outputs = neuronLayer.getOutputs();
 		for(int i=0; i<outputs.length; i++){

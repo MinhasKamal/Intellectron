@@ -45,7 +45,7 @@ public class Neuron {
 	 * @param inputSignals
 	 * @return output of the process
 	 */
-	public double processSignal(double[] inputSignals){
+	public double processSignalForward(double[] inputSignals){
 		double signalWeightSum = 0;
 		
 		for(int i=0; i<inputSignals.length; i++){
@@ -55,6 +55,23 @@ public class Neuron {
 		double outputSignal = 1 / ( 1 + Math.exp(-signalWeightSum) );
 		
 		return outputSignal;
+	}
+	
+	/**
+	 * feed backward - sigmoid
+	 * @param inputSignals
+	 * @return output of the process
+	 */
+	public double[] processSignalBackward(double inputSignal){
+		double[] outputSignals = new double[this.dendrites.size()];
+		
+		double signalWeightSum = -Math.log((1-inputSignal)/inputSignal);
+		double signalWeightMean = signalWeightSum/outputSignals.length;
+		for(int i=0; i<outputSignals.length; i++){
+			outputSignals[i] = this.dendrites.get(i).throwSignal(signalWeightMean);
+		}
+		
+		return outputSignals;
 	}
 	
 	/**
@@ -70,6 +87,10 @@ public class Neuron {
 	
 	public double getWeight(int dendriteNumber){
 		return this.dendrites.get(dendriteNumber).getWeight();
+	}
+	
+	public int getNumberOfDendrites(){
+		return this.dendrites.size();
 	}
 	
 	public String dump(){
