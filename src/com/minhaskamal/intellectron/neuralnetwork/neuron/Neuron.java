@@ -63,10 +63,10 @@ public class Neuron {
 	 * @return output of the process
 	 */
 	public double[] processSignalBackward(double inputSignal){
-		double[] outputSignals = new double[this.dendrites.size()];
-		
 		double signalWeightSum = -Math.log((1-inputSignal)/inputSignal);
-		double signalWeightMean = signalWeightSum/outputSignals.length;
+		double signalWeightMean = signalWeightSum/this.dendrites.size();
+		
+		double[] outputSignals = new double[this.dendrites.size()];
 		for(int i=0; i<outputSignals.length; i++){
 			outputSignals[i] = this.dendrites.get(i).throwSignal(signalWeightMean);
 		}

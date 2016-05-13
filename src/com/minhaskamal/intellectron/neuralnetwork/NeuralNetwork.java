@@ -63,13 +63,15 @@ public class NeuralNetwork {
 	}
 	
 	public double[] processBackward(double[] seed){
+		seed = addBias(seed);
 		
 		neuronLayers.getLast().setOutputs(seed);
 		for(int i=neuronLayers.size()-1; i>0; i--){
 			neuronLayers.get(i-1).setOutputs(neuronLayers.get(i).processBackward());
 		}
+		double[] generatedSignal = neuronLayers.getFirst().processBackward();
 		
-		return neuronLayers.getFirst().processBackward();
+		return removeBias(generatedSignal);
 	}
 	
 	/**

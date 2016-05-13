@@ -38,9 +38,8 @@ public class NeuralNetworkImplementation {
 		}
 	}
 	
-	public double test(double[][] inputs, double[][] outputs){
+	public double test(double[][] inputs, double[][] outputs, double tolerance){
 		double accuracy = 0;
-		double tolerance = 0.1;
 		
 		for(int i=0; i<inputs.length; i++){
 			double[] predictedOutput = predict(inputs[i]);
@@ -69,6 +68,10 @@ public class NeuralNetworkImplementation {
 	public double[] predict(double[] input){
 		this.neuralNetwork.processForward(input);
 		return neuralNetwork.getOutputs();
+	}
+	
+	public double[] generate(double[] seed){
+		return neuralNetwork.processBackward(seed);
 	}
 	
 	public void dump(String filePath){

@@ -27,12 +27,19 @@ public class NeuralNetworkImplementationTest {
 			neuralNetworkImplementation.train(inputs, outputs);
 		}
 		
-		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
-		neuralNetworkImplementation.dump(workspace+"knowledge.xml");
+//		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
+//		neuralNetworkImplementation.dump(workspace+"knowledge.xml");
 		
 		//another NeuralNetworkImplementation//
-		NeuralNetworkImplementation neuralNetworkImplementation2 = new NeuralNetworkImplementation(workspace+"knowledge.xml");
-		double accuracy = neuralNetworkImplementation2.test(inputs, outputs);
-		System.out.println(accuracy);
+//		NeuralNetworkImplementation neuralNetworkImplementation2 = new NeuralNetworkImplementation(workspace+"knowledge.xml");
+//		double accuracy = neuralNetworkImplementation2.test(inputs, outputs, 0.1);
+//		System.out.println("accuracy: " + accuracy);
+		
+		//back processing//
+		double[] seed = new double[]{0.001};
+		double[] data = neuralNetworkImplementation.generate(seed);
+		for(int i=0; i<data.length; i++){
+			System.out.print(data[i] + " ");
+		}
 	}
 }
