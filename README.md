@@ -1,4 +1,4 @@
-# Intellectron
+# Intellectron &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Gitter](https://badges.gitter.im/MinhasKamal/Intellectron.svg)](https://gitter.im/MinhasKamal/Intellectron?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 
 A simple implementation of Artificial Neural Network
 
