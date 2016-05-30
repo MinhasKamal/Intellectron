@@ -6,7 +6,7 @@
 
 package test;
 
-import com.minhaskamal.intellectron.neuralnetwork.NeuronLayer;
+import com.minhaskamal.intellectron.neuralnetworks.neuronLayers.NeuronLayer;
 
 public class NeuralLayerTest {
 	public static void main(String[] args) {
@@ -20,6 +20,6 @@ public class NeuralLayerTest {
 			System.out.print(outputs[i]+", ");
 		}
 		
-		System.out.println(neuronLayer.toString());
+		System.out.println(neuronLayer.dump());
 	}
 }

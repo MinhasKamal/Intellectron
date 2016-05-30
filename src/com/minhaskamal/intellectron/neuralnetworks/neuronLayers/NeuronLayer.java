@@ -4,13 +4,14 @@
 * License:  GNU General Public License version-3           *
 ***********************************************************/
 
-package com.minhaskamal.intellectron.neuralnetwork;
+package com.minhaskamal.intellectron.neuralnetworks.neuronLayers;
 
 import java.util.LinkedList;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import com.minhaskamal.intellectron.neuralnetwork.neuron.Neuron;
+
+import com.minhaskamal.intellectron.neuralnetworks.neuronLayers.neuron.*;
 
 public class NeuronLayer {
 	public double learningRate;

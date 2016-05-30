@@ -4,7 +4,7 @@
 * License:  GNU General Public License version-3           *
 ***********************************************************/
 
-package com.minhaskamal.intellectron.neuralnetwork.neuron;
+package com.minhaskamal.intellectron.neuralnetworks.neuronLayers.neuron;
 
 import java.util.Random;
 

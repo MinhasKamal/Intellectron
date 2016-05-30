@@ -6,12 +6,13 @@
 
 package test;
 
-import com.minhaskamal.intellectron.neuralnetwork.NeuralNetwork;
+import com.minhaskamal.intellectron.neuralnetworks.MultiLayerNeuralNetwork;
 
-public class NeuralNetworkTest {
+
+public class MultiLayerNeuralNetworkTest {
 	public static void main(String[] args) {
 		int[] numbersOfNeuronsInLayers = new int[]{4, 1};
-		NeuralNetwork neuralNetwork = new NeuralNetwork(numbersOfNeuronsInLayers, 0.1, 2);
+		MultiLayerNeuralNetwork neuralNetwork = new MultiLayerNeuralNetwork(numbersOfNeuronsInLayers, 0.1, 2);
 		
 		//input only, bias is handled internally//
 		double[][] inputs = new double[][]{

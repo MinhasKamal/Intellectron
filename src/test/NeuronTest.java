@@ -6,7 +6,8 @@
 
 package test;
 
-import com.minhaskamal.intellectron.neuralnetwork.neuron.Neuron;
+import com.minhaskamal.intellectron.neuralnetworks.neuronLayers.neuron.Neuron;
+
 
 public class NeuronTest {
 	public static void main(String[] args) throws Exception {
@@ -43,6 +44,6 @@ public class NeuronTest {
 			System.out.println(" -> "+cycle);
 		}
 		
-		System.out.println(neuron.toString());
+		System.out.println(neuron.dump());
 	}
 }

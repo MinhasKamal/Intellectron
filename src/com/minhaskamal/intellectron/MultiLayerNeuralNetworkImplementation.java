@@ -8,23 +8,23 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.minhaskamal.intellectron.neuralnetwork.NeuralNetwork;
-import com.minhaskamal.intellectron.util.FileIO;
+import com.minhaskamal.intellectron.neuralnetworks.MultiLayerNeuralNetwork;
+import com.minhaskamal.intellectron.util.*;
 
-public class NeuralNetworkImplementation {
+public class MultiLayerNeuralNetworkImplementation {
 	
-	private NeuralNetwork neuralNetwork;
+	private MultiLayerNeuralNetwork neuralNetwork;
 	
-	public NeuralNetworkImplementation(int[] numbersOfNeuronsInLayers, double learningRateOfAllLayers, int numberOfInputs) {
-		this.neuralNetwork = new NeuralNetwork(numbersOfNeuronsInLayers, learningRateOfAllLayers, numberOfInputs);
+	public MultiLayerNeuralNetworkImplementation(int[] numbersOfNeuronsInLayers, double learningRateOfAllLayers, int numberOfInputs) {
+		this.neuralNetwork = new MultiLayerNeuralNetwork(numbersOfNeuronsInLayers, learningRateOfAllLayers, numberOfInputs);
 	}
 	
-	public NeuralNetworkImplementation(String filePath) {
+	public MultiLayerNeuralNetworkImplementation(String filePath) {
 		try {
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(filePath));
-			NodeList nodeList = document.getElementsByTagName(NeuralNetwork.NEURAL_NETWORK_TAG);
+			NodeList nodeList = document.getElementsByTagName(MultiLayerNeuralNetwork.NEURAL_NETWORK_TAG);
 	        Node neuralNetworkNode = nodeList.item(0);
-			this.neuralNetwork = new NeuralNetwork(neuralNetworkNode);
+			this.neuralNetwork = new MultiLayerNeuralNetwork(neuralNetworkNode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,6 +36,12 @@ public class NeuralNetworkImplementation {
 			this.neuralNetwork.calculateErrors(outputs[i]);
 			this.neuralNetwork.learn(inputs[i]);
 		}
+	}
+	
+	public void train(double[] input, double[] output){
+		this.neuralNetwork.processForward(input);
+		this.neuralNetwork.calculateErrors(output);
+		this.neuralNetwork.learn(input);
 	}
 	
 	public double test(double[][] inputs, double[][] outputs, double tolerance){

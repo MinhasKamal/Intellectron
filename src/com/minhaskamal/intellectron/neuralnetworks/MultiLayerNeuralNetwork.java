@@ -4,13 +4,15 @@
 * License:  GNU General Public License version-3           *
 ***********************************************************/
 
-package com.minhaskamal.intellectron.neuralnetwork;
+package com.minhaskamal.intellectron.neuralnetworks;
 
 import java.util.LinkedList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class NeuralNetwork {
+import com.minhaskamal.intellectron.neuralnetworks.neuronLayers.*;
+
+public class MultiLayerNeuralNetwork {
 	private LinkedList<NeuronLayer> neuronLayers;
 	//public String neuralNetworkName;
 	
@@ -21,7 +23,7 @@ public class NeuralNetwork {
 	 * neuron number is the number of outputs
 	 * @param numberOfInputs 
 	 */
-	public NeuralNetwork(int[] numbersOfNeuronsInLayers, double[] learningRatesOfTheLayers, int numberOfInputs) {
+	public MultiLayerNeuralNetwork(int[] numbersOfNeuronsInLayers, double[] learningRatesOfTheLayers, int numberOfInputs) {
 		neuronLayers = new LinkedList<NeuronLayer>();
 		
 		neuronLayers.add(new NeuronLayer(numbersOfNeuronsInLayers[0], numberOfInputs, learningRatesOfTheLayers[0]));
@@ -30,7 +32,7 @@ public class NeuralNetwork {
 		}
 	}
 	
-	public NeuralNetwork(int[] numbersOfNeuronsInLayers, double learningRateOfAllLayers, int numberOfInputs) {
+	public MultiLayerNeuralNetwork(int[] numbersOfNeuronsInLayers, double learningRateOfAllLayers, int numberOfInputs) {
 		neuronLayers = new LinkedList<NeuronLayer>();
 		
 		neuronLayers.add(new NeuronLayer(numbersOfNeuronsInLayers[0], numberOfInputs, learningRateOfAllLayers));
@@ -39,7 +41,7 @@ public class NeuralNetwork {
 		}
 	}
 	
-	public NeuralNetwork(Node neuralNetworkNode) {
+	public MultiLayerNeuralNetwork(Node neuralNetworkNode) {
 		this.neuronLayers = new LinkedList<NeuronLayer>();
 		
 		NodeList neuronLayerNodeList = neuralNetworkNode.getChildNodes();
