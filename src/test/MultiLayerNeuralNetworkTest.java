@@ -29,7 +29,7 @@ public class MultiLayerNeuralNetworkTest {
 			{1}
 		};
 		
-		System.out.println(neuralNetwork.toString());
+		System.out.println(neuralNetwork.dump());
 		
 		//training
 		for(int cycle=0; cycle<50000; cycle++){
@@ -41,17 +41,16 @@ public class MultiLayerNeuralNetworkTest {
 				
 				if(cycle%1000==0){
 					double[] o = neuralNetwork.getOutputs();
-					for(int p=0; p<o.length-1; p++){
-						System.out.print(o[p]+" ");
+					for(int p=0; p<o.length; p++){
+						System.out.print(o[p]+", ");
 					}
-					System.out.print("#");
 				}
 			}
 			if(cycle%1000==0){
-				System.out.println("cycle->" + cycle);
+				System.out.println("#cycle->" + cycle);
 			}
 		}
 		
-		System.out.println(neuralNetwork.toString());
+		System.out.println(neuralNetwork.dump());
 	}
 }

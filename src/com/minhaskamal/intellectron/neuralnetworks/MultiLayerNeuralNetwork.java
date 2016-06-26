@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 
 import com.minhaskamal.intellectron.neuralnetworks.neuronLayers.*;
 
-public class MultiLayerNeuralNetwork {
+public class MultiLayerNeuralNetwork extends NeuralNetwork{
 	private LinkedList<NeuronLayer> neuronLayers;
 	//public String neuralNetworkName;
 	
@@ -51,6 +51,10 @@ public class MultiLayerNeuralNetwork {
 				this.neuronLayers.add(new NeuronLayer(neuronLayerNode));
 			}
 		}
+	}
+	
+	public NeuronLayer getLayer(int index){
+		return this.neuronLayers.get(index);
 	}
 	
 	///////////////////////////////PROCESS//////////////////////////////////
@@ -119,28 +123,5 @@ public class MultiLayerNeuralNetwork {
 		string += "</"+NEURAL_NETWORK_TAG+">";
 		
 		return string;
-	}
-	
-	//////
-	
-	private double[] addBias(double[] inputs){
-		double[] inputsWithBias = new double[inputs.length+1];
-		
-		for(int i=0; i<inputs.length; i++){
-			inputsWithBias[i] = inputs[i];
-		}
-		inputsWithBias[inputsWithBias.length-1] = 1;
-		
-		return inputsWithBias;
-	}
-	
-	private double[] removeBias(double[] outputs){
-		double[] outputsWithoutBias = new double[outputs.length-1];
-		
-		for(int i=0; i<outputsWithoutBias.length; i++){
-			outputsWithoutBias[i] = outputs[i];
-		}
-		
-		return outputsWithoutBias;
 	}
 }
