@@ -11,27 +11,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.minhaskamal.intellectron.neuralnetworks.neuronLayers.*;
+import com.minhaskamal.intellectron.util.NeuralNetworkUtils;
 
-public class MultiLayerNeuralNetwork extends NeuralNetwork{
+public class MultiLayerNeuralNetwork{
 	private LinkedList<NeuronLayer> neuronLayers;
 	//public String neuralNetworkName;
 	
-	public static String NEURAL_NETWORK_TAG= "neural-network";
+	public static String MULTI_LAYER_NEURAL_NETWORK_TAG= "multi-layer-neural-network";
 	
 	/**
 	 * @param numbersOfNeuronsInLayers numbersOfNeuronsInLayers.length is the number of layers in the network, the last layer's 
 	 * neuron number is the number of outputs
 	 * @param numberOfInputs 
 	 */
-	public MultiLayerNeuralNetwork(int[] numbersOfNeuronsInLayers, double[] learningRatesOfTheLayers, int numberOfInputs) {
-		neuronLayers = new LinkedList<NeuronLayer>();
-		
-		neuronLayers.add(new NeuronLayer(numbersOfNeuronsInLayers[0], numberOfInputs, learningRatesOfTheLayers[0]));
-		for(int i=1; i<numbersOfNeuronsInLayers.length; i++){
-			neuronLayers.add(new NeuronLayer(numbersOfNeuronsInLayers[i], neuronLayers.getLast(), learningRatesOfTheLayers[i]));
-		}
-	}
-	
 	public MultiLayerNeuralNetwork(int[] numbersOfNeuronsInLayers, double learningRateOfAllLayers, int numberOfInputs) {
 		neuronLayers = new LinkedList<NeuronLayer>();
 		
@@ -57,10 +49,10 @@ public class MultiLayerNeuralNetwork extends NeuralNetwork{
 		return this.neuronLayers.get(index);
 	}
 	
-	///////////////////////////////PROCESS//////////////////////////////////
+	//PROCESS///////////////////////////////////////////////////////////////
 	
 	public void processForward(double[] inputs){
-		inputs = addBias(inputs);
+		inputs = NeuralNetworkUtils.addBias(inputs);
 		
 		neuronLayers.getFirst().processForward(inputs);
 		for(int i=1; i<neuronLayers.size(); i++){
@@ -69,7 +61,7 @@ public class MultiLayerNeuralNetwork extends NeuralNetwork{
 	}
 	
 	public double[] processBackward(double[] seed){
-		seed = addBias(seed);
+		seed = NeuralNetworkUtils.addBias(seed);
 		
 		neuronLayers.getLast().setOutputs(seed);
 		for(int i=neuronLayers.size()-1; i>0; i--){
@@ -77,17 +69,17 @@ public class MultiLayerNeuralNetwork extends NeuralNetwork{
 		}
 		double[] generatedSignal = neuronLayers.getFirst().processBackward();
 		
-		return removeBias(generatedSignal);
+		return NeuralNetworkUtils.removeBias(generatedSignal);
 	}
 	
 	/**
 	 * @return does not includes bias
 	 */
 	public double[] getOutputs(){
-		return removeBias(neuronLayers.getLast().getOutputs());
+		return NeuralNetworkUtils.removeBias(neuronLayers.getLast().getOutputs());
 	}
 	
-	/////////////////////////////ERROR CALCULATION///////////////////////////////
+	//ERROR CALCULATION//////////////////////////////////////////////////////
 	
 	public void calculateErrors(double[] expectedOutputs){
 		this.neuronLayers.getLast().calculateErrors(expectedOutputs);
@@ -100,10 +92,10 @@ public class MultiLayerNeuralNetwork extends NeuralNetwork{
 		return this.neuronLayers.getLast().getErrors();
 	}
 	
-	/////////////////////////////LEARN///////////////////////////////
+	//LEARN/////////////////////////////////////////////////////////////////
 	
 	public void learn(double[] inputs){
-		inputs = addBias(inputs);
+		inputs = NeuralNetworkUtils.addBias(inputs);
 		
 		for(int i=this.neuronLayers.size()-1; i>0; i--){
 			this.neuronLayers.get(i).learn(this.neuronLayers.get(i-1)); //learn i+1 layer
@@ -111,16 +103,16 @@ public class MultiLayerNeuralNetwork extends NeuralNetwork{
 		this.neuronLayers.getFirst().learn(inputs);
 	}
 	
-	//////////////////////////////KNOWLEDGE STORE/////////////////////////////////
+	//KNOWLEDGE STORE///////////////////////////////////////////////////////
 	
 	public String dump(){
-		String string = "<"+NEURAL_NETWORK_TAG+">\n";
+		String string = "<"+MULTI_LAYER_NEURAL_NETWORK_TAG+">\n";
 		
 		for(NeuronLayer neuronLayer: this.neuronLayers){
 			string += neuronLayer.dump()+"\n";
 		}
 		
-		string += "</"+NEURAL_NETWORK_TAG+">";
+		string += "</"+MULTI_LAYER_NEURAL_NETWORK_TAG+">";
 		
 		return string;
 	}

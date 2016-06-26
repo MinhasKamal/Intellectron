@@ -1,3 +1,9 @@
+/***********************************************************
+* Developer: Minhas Kamal (minhaskamal024@gmail.com)       *
+* Website: https://github.com/MinhasKamal/Intellectron     *
+* License:  GNU General Public License version-3           *
+***********************************************************/
+
 package test;
 
 import com.minhaskamal.intellectron.neuralnetworks.DeepNeuralNetwork;
@@ -16,16 +22,16 @@ public class DeepNeuralNetworkTest {
 		};
 		//output//
 		double[][] outputs = new double[][]{
+			{0},
 			{1},
-			{0},
-			{0},
-			{1}
+			{1},
+			{0}
 		};
 		
-//		System.out.println(neuralNetwork.dump());
+		System.out.println(neuralNetwork.dump());
 		
 		//training
-		for(int cycle=0; cycle<50000; cycle++){
+		for(int cycle=0; cycle<20000; cycle++){
 			for(int i=0; i<inputs.length; i++){
 				
 				neuralNetwork.train(inputs[i], outputs[i]);
@@ -42,6 +48,6 @@ public class DeepNeuralNetworkTest {
 			}
 		}
 		
-//		System.out.println(neuralNetwork.dump());
+		System.out.println(neuralNetwork.dump());
 	}
 }

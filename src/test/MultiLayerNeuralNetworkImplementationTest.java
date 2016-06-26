@@ -1,3 +1,9 @@
+/***********************************************************
+* Developer: Minhas Kamal (minhaskamal024@gmail.com)       *
+* Website: https://github.com/MinhasKamal/Intellectron     *
+* License:  GNU General Public License version-3           *
+***********************************************************/
+
 package test;
 
 import com.minhaskamal.intellectron.MultiLayerNeuralNetworkImplementation;

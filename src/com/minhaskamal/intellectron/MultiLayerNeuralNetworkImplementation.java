@@ -22,7 +22,7 @@ public class MultiLayerNeuralNetworkImplementation {
 	public MultiLayerNeuralNetworkImplementation(String filePath) {
 		try {
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File(filePath));
-			NodeList nodeList = document.getElementsByTagName(MultiLayerNeuralNetwork.NEURAL_NETWORK_TAG);
+			NodeList nodeList = document.getElementsByTagName(MultiLayerNeuralNetwork.MULTI_LAYER_NEURAL_NETWORK_TAG);
 	        Node neuralNetworkNode = nodeList.item(0);
 			this.neuralNetwork = new MultiLayerNeuralNetwork(neuralNetworkNode);
 		} catch (Exception e) {
@@ -30,11 +30,11 @@ public class MultiLayerNeuralNetworkImplementation {
 		}
 	}
 	
+	//TRAIN/////////////////////////////////////////////////////////////
+	
 	public void train(double[][] inputs, double[][] outputs){
 		for(int i=0; i<inputs.length; i++){
-			this.neuralNetwork.processForward(inputs[i]);
-			this.neuralNetwork.calculateErrors(outputs[i]);
-			this.neuralNetwork.learn(inputs[i]);
+			train(inputs[i], outputs[i]);
 		}
 	}
 	
@@ -43,6 +43,8 @@ public class MultiLayerNeuralNetworkImplementation {
 		this.neuralNetwork.calculateErrors(output);
 		this.neuralNetwork.learn(input);
 	}
+	
+	//TEST//////////////////////////////////////////////////////////////
 	
 	public double test(double[][] inputs, double[][] outputs, double tolerance){
 		double accuracy = 0;
@@ -71,14 +73,20 @@ public class MultiLayerNeuralNetworkImplementation {
 		return true;
 	}
 	
+	//PREDICT///////////////////////////////////////////////////////////
+	
 	public double[] predict(double[] input){
 		this.neuralNetwork.processForward(input);
 		return neuralNetwork.getOutputs();
 	}
 	
+	//DATA_GENERATION///////////////////////////////////////////////////
+	
 	public double[] generate(double[] seed){
 		return neuralNetwork.processBackward(seed);
 	}
+	
+	//NETWORK_DUMP//////////////////////////////////////////////////////
 	
 	public void dump(String filePath){
 		try {
