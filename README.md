@@ -2,7 +2,7 @@
 
 #### An Innocent Library of Artificial Neural Network
 
-In this era of Machine Learning, when Deep Neural Network Frameworks are both large and complicated, [this](http://minhaskamal.github.io/Intellectron) plain and easy to use Deep Learning Library may really come in handy.
+In this era of Machine Learning, when Deep ANN Frameworks are both large and complicated, [this](http://minhaskamal.github.io/Intellectron) plain and easy to use Deep Learning Library may really come in handy.
 
 ### How to Use?
 1. [Download](https://github.com/MinhasKamal/Intellectron/archive/master.zip) the full project, unzip it, import the project to your IDE, and attach it in your project's build path as a required project.
