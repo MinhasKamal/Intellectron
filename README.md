@@ -13,11 +13,11 @@
 			{0, 0},	{0, 1},	{1, 0},	{1, 1}
 		};
 		double[][] expectedOutputs = new double[][]{
-			{1}, {0},	{0}, {1}
+			{1}, {0}, {0}, {1}
 		};
 		
 		//deep neural network//
-		int[] numbersOfNeuronsInLayers = new int[]{4, 3, 2, 1};
+		int[] numbersOfNeuronsInLayers = new int[]{4, 3, 2, 1}; //neural network structure
 		DeepNeuralNetworkImplementation deepNeuralNetworkImplementation = 
 		    new DeepNeuralNetworkImplementation(numbersOfNeuronsInLayers, 0.1, 2);
 		
@@ -33,7 +33,7 @@
   }
 ```
 
-You can also find some simple implementations like it in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a nice project [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer) which uses both [Intellectron](https://github.com/MinhasKamal/Intellectron) and [Egami](https://github.com/MinhasKamal/Egami).
+You can find some simple implementations like it in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a nice project- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer), which uses [Intellectron](https://github.com/MinhasKamal/Intellectron) and [Egami](https://github.com/MinhasKamal/Egami).
 
 ### License
 <a rel="license" href="http://www.gnu.org/licenses/gpl.html">
