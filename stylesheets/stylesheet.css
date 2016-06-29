@@ -441,10 +441,10 @@ p {
 }
 
 a {
-  color: #2879d0;
+  color: #669999;
 }
 a:hover {
-  color: #2268b2;
+  color: #476b6b;
 }
 
 header {
@@ -567,7 +567,7 @@ pre {
 }
 pre code {
   padding: 0;
-  color: #2879d0;
+  color: #006666;
   background-color: #fff;
   border: none;
 }
