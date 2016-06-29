@@ -35,7 +35,7 @@ In this era of Machine Learning, when Deep ANN Frameworks are both large and com
   }
 ```
 
-You can find some simple implementations like it in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a nice project- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer), which uses [Intellectron](https://github.com/MinhasKamal/Intellectron), you will get a nice insight from it too.
+You can find some simple implementations like it in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a nice project- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer), which uses [Intellectron](https://github.com/MinhasKamal/Intellectron); you will get a nice insight from it too.
 
 ### License
 <a rel="license" href="http://www.gnu.org/licenses/gpl.html">
