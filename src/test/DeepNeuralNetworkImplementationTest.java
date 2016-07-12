@@ -15,31 +15,28 @@ public class DeepNeuralNetworkImplementationTest {
 		
 		//input only, bias is handled internally//
 		double[][] inputs = new double[][]{
-			{0, 0},
-			{0, 1},
-			{1, 0},
-			{1, 1}
+			{0, 0}, {0, 1}, {1, 0}, {1, 1}
 		};
 		//output//
 		double[][] outputs = new double[][]{
-			{1},
-			{0},
-			{0},
-			{1}
+			{1}, {0}, {0}, {1}
 		};
 		
-		int cycle = 20000;
+		int cycle = 15000;
 		for(int i=0; i<cycle; i++){
-			deepNeuralNetworkImplementation.train(inputs, outputs);
+			deepNeuralNetworkImplementation.train2(inputs, outputs);
+			if(i%100==0){
+				System.out.println("accuracy: " + deepNeuralNetworkImplementation.test(inputs, outputs, 0.1));
+			}
 		}
 		
-		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
-		deepNeuralNetworkImplementation.dump(workspace+"knowledge.xml");
+//		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
+//		deepNeuralNetworkImplementation.dump(workspace+"knowledge.xml");
 		
 		//another NeuralNetworkImplementation//
-		DeepNeuralNetworkImplementation deepNeuralNetworkImplementationn2 = new DeepNeuralNetworkImplementation(workspace+"knowledge.xml");
-		double accuracy = deepNeuralNetworkImplementationn2.test(inputs, outputs, 0.1);
-		System.out.println("accuracy: " + accuracy);
+//		DeepNeuralNetworkImplementation deepNeuralNetworkImplementationn2 = new DeepNeuralNetworkImplementation(workspace+"knowledge.xml");
+//		double accuracy = deepNeuralNetworkImplementationn2.test(inputs, outputs, 0.1);
+//		System.out.println("accuracy: " + accuracy);
 		
 		//back processing//
 //		double[] seed = new double[]{0.001};

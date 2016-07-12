@@ -49,6 +49,16 @@ public class MultiLayerNeuralNetwork{
 		return this.neuronLayers.get(index);
 	}
 	
+	
+	//TRAIN//////////////////////////////////////////////////////////////////
+	
+	public void train(double[] input, double[] output){
+		processForward(input);
+		calculateErrors(output);
+		learn(input);
+	}
+	
+	
 	//PROCESS///////////////////////////////////////////////////////////////
 	
 	public void processForward(double[] inputs){

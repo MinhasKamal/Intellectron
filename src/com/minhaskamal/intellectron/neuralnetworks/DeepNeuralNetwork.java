@@ -21,6 +21,8 @@ public class DeepNeuralNetwork{
 	 * 
 	 * @param numbersOfNeuronsInLayers if number of layers is less than 3, i.e. 
 	 * <code>(numbersOfNeuronsInLayers<3)</code>, then the network will not be created.
+	 * Last 2 layers are trained with back-propagation only & other layer are trained 
+	 * like auto-encoder. 
 	 * @param learningRateOfAllLayers
 	 * @param numberOfInputs
 	 */
@@ -78,7 +80,8 @@ public class DeepNeuralNetwork{
 	}
 	
 	//TRAIN//////////////////////////////////////////////////////////////////
-	
+	//back-propagation training for last 2 layers, unsupervised auto-encoder//
+	//training for the rest.//
 	public void train(double[] inputs, double[] expectedOutputs){
 		double[] input = inputs.clone();
 		
@@ -95,6 +98,31 @@ public class DeepNeuralNetwork{
 		this.neuralNetworks.getLast().learn(input);
 	}
 	
+	//after training in unsupervised way, trains the full network using//
+	//back-propagation.//
+	public void train2(double[] inputs, double[] expectedOutputs){
+		train(inputs, expectedOutputs);
+		
+		calculateErrors();
+		learn(inputs.clone());
+	}
+	
+	//ERROR CALCULATION//
+	private void calculateErrors(){
+		for(int i=neuralNetworks.size()-1; i>0; i--){
+			this.neuralNetworks.get(i-1).getLayer(0).calculateErrors(this.neuralNetworks.get(i).getLayer(0));
+		}
+	}
+	
+	//LEARN//
+	private void learn(double[] inputs){
+		inputs = NeuralNetworkUtils.addBias(inputs);
+		
+		for(int i=this.neuralNetworks.size()-1-1; i>0; i--){
+			this.neuralNetworks.get(i).getLayer(0).learn(this.neuralNetworks.get(i-1).getLayer(0));
+		}
+		this.neuralNetworks.getFirst().getLayer(0).learn(inputs);
+	}
 	
 	//KNOWLEDGE STORE///////////////////////////////////////////////////////
 	

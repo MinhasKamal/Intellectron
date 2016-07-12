@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
 
 import com.minhaskamal.intellectron.neuralnetworks.DeepNeuralNetwork;
 import com.minhaskamal.intellectron.util.FileIO;
+import com.minhaskamal.intellectron.util.NeuralNetworkUtils;
 
 public class DeepNeuralNetworkImplementation {
 	private DeepNeuralNetwork deepNeuralNetwork;
@@ -47,6 +48,16 @@ public class DeepNeuralNetworkImplementation {
 		this.deepNeuralNetwork.train(input, output);
 	}
 	
+	public void train2(double[][] inputs, double[][] outputs){
+		for(int i=0; i<inputs.length; i++){
+			train2(inputs[i], outputs[i]);
+		}
+	}
+	
+	public void train2(double[] input, double[] output){
+		this.deepNeuralNetwork.train2(input, output);
+	}
+	
 	//TEST//////////////////////////////////////////////////////////////
 	
 	public double test(double[][] inputs, double[][] outputs, double tolerance){
@@ -55,7 +66,7 @@ public class DeepNeuralNetworkImplementation {
 		for(int i=0; i<inputs.length; i++){
 			double[] predictedOutput = predict(inputs[i]);
 			
-			if(isEqual(predictedOutput, outputs[i], tolerance)){
+			if(NeuralNetworkUtils.isEqual(predictedOutput, outputs[i], tolerance)){
 				accuracy++;
 			}
 		}
@@ -63,17 +74,6 @@ public class DeepNeuralNetworkImplementation {
 		accuracy = accuracy/inputs.length;
 		
 		return accuracy;
-	}
-	
-	private boolean isEqual(double[] predictedOutput, double[] expectedOutput, double tolerance){
-		for(int i=0; i<predictedOutput.length; i++){
-			double diffrence = Math.abs(predictedOutput[i]-expectedOutput[i]);
-			if(diffrence>tolerance){
-				return false;
-			}
-		}
-		
-		return true;
 	}
 	
 	//PREDICT///////////////////////////////////////////////////////////

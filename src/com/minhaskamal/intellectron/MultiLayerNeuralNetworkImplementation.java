@@ -39,9 +39,7 @@ public class MultiLayerNeuralNetworkImplementation {
 	}
 	
 	public void train(double[] input, double[] output){
-		this.neuralNetwork.processForward(input);
-		this.neuralNetwork.calculateErrors(output);
-		this.neuralNetwork.learn(input);
+		this.neuralNetwork.train(input, output);
 	}
 	
 	//TEST//////////////////////////////////////////////////////////////
@@ -52,7 +50,7 @@ public class MultiLayerNeuralNetworkImplementation {
 		for(int i=0; i<inputs.length; i++){
 			double[] predictedOutput = predict(inputs[i]);
 			
-			if(isEqual(predictedOutput, outputs[i], tolerance)){
+			if(NeuralNetworkUtils.isEqual(predictedOutput, outputs[i], tolerance)){
 				accuracy++;
 			}
 		}
@@ -60,17 +58,6 @@ public class MultiLayerNeuralNetworkImplementation {
 		accuracy = accuracy/inputs.length;
 		
 		return accuracy;
-	}
-	
-	private boolean isEqual(double[] predictedOutput, double[] expectedOutput, double tolerance){
-		for(int i=0; i<predictedOutput.length; i++){
-			double diffrence = Math.abs(predictedOutput[i]-expectedOutput[i]);
-			if(diffrence>tolerance){
-				return false;
-			}
-		}
-		
-		return true;
 	}
 	
 	//PREDICT///////////////////////////////////////////////////////////
