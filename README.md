@@ -1,8 +1,8 @@
-# :space_invader: Intellectron &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Gitter](https://badges.gitter.im/MinhasKamal/Intellectron.svg)](https://gitter.im/MinhasKamal/Intellectron?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+# Intellectron
 
 #### An Innocent Library of Artificial Neural Network
 
-[The project](http://minhaskamal.github.io/Intellectron) is a simple implementation of ANN. Several machine learning algorithms are put together here. This tiny library is particularly suitable for small projects.
+The project is a simple implementation of Deep Neural Network. Several machine learning algorithms are put together here. This tiny library is particularly suitable for small projects.
 
 ### How to Use?
 1. [Download](https://github.com/MinhasKamal/Intellectron/archive/master.zip) the full project, unzip it, import the project to your IDE, and attach it in your project's build path as a required project.
@@ -35,10 +35,11 @@
   }
 ```
 
-You can find some simple implementations like it in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a beautiful project- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer), which uses [Intellectron](https://github.com/MinhasKamal/Intellectron); you will get a nice insight from it too.
+You can find some simple implementations in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a beautiful project- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer), which uses [Intellectron](https://github.com/MinhasKamal/Intellectron); you will get a nice insight from it too.
 
 ### License
-<a rel="license" href="http://www.gnu.org/licenses/gpl.html">
-<img alt="GNU General Public License" style="border-width:0" src="http://www.gnu.org/graphics/gplv3-127x51.png" />
-</a>
-<br/>Intellectron is licensed under a <a rel="license" href="http://www.gnu.org/licenses/gpl.html">GNU General Public License version-3</a>.
+
+<a rel="license" href="https://opensource.org/licenses/MIT"><img alt="MIT License" src="https://cloud.githubusercontent.com/assets/5456665/18950087/fbe0681a-865f-11e6-9552-e59d038d5913.png" width="60em" height=auto/></a><br/>
+
+<a href="https://github.com/MinhasKamal/Intellectron">Intellectron</a> is licensed under <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
+
