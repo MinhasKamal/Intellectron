@@ -8,14 +8,10 @@ package com.minhaskamal.intellectron.dataPrepare;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
 
-import com.minhaskamal.egami.matrix.Matrix;
-import com.minhaskamal.egami.matrix.utils.MatrixUtils;
-
-public class ImageDataPreparer {
+public abstract class DataPreparer {
 	
 	private double[][][] trainingData;
 	private double[][][] testingData;
@@ -27,9 +23,8 @@ public class ImageDataPreparer {
 	 * @param numberOfTrainingData number of training data for each category
 	 * @param magnitudeOfShuffles if <code>'<1'</code> no shuffling occurs
 	 */
-	public ImageDataPreparer(String rootDirectoryPath, int numberOfTrainingData, int numberOfCrossShuffles) {
-		double[][][] inputs = prepareMatrixData(prepareDataPaths(rootDirectoryPath));
-				//[folder][file][data] i.e. [male][001.png][125,233,...]
+	public DataPreparer(String rootDirectoryPath, int numberOfTrainingData, int numberOfCrossShuffles) {
+		double[][][] inputs = prepareData(prepareDataPaths(rootDirectoryPath)); //[folder][file][data] i.e. [male][001.png][125,233,...]
 		double[][] outputs = prepareOutputs(inputs.length);
 		
 		this.trainingData = createData(inputs, outputs, 0, numberOfTrainingData); 
@@ -44,7 +39,7 @@ public class ImageDataPreparer {
 	/**
 	 * No shuffling occurs.
 	 */
-	public ImageDataPreparer(String rootDirectoryPath, int numberOfTrainingData){
+	public DataPreparer(String rootDirectoryPath, int numberOfTrainingData){
 		this(rootDirectoryPath, numberOfTrainingData, -1);
 	}
 	
@@ -52,7 +47,7 @@ public class ImageDataPreparer {
 	 * All data will be added in <code>trainingData</code>, <code>testingData</code> 
 	 * will be null. No shuffling occurs.
 	 */
-	public ImageDataPreparer(String rootDirectoryPath) {
+	public DataPreparer(String rootDirectoryPath) {
 		this(rootDirectoryPath, Integer.MAX_VALUE);
 	}
 	
@@ -80,27 +75,26 @@ public class ImageDataPreparer {
 		return allFilePaths;
 	}
 	
-	private double[][][] prepareMatrixData(String[][] allFilePaths){
+	private double[][][] prepareData(String[][] allFilePaths){
 		double[][][] inputs = new double[allFilePaths.length][][];
 		
-		try {
-			for(int i=0; i<allFilePaths.length; i++){
-				inputs[i] = new double[allFilePaths[i].length][];
-				for(int j=0; j<allFilePaths[i].length; j++){
-					Matrix matrix = new Matrix(allFilePaths[i][j], Matrix.BLACK_WHITE);
-					
-					//matrix = new MatrixUtilities().convertToBinary(matrix, 170);
-					
-					int[] rawInputVector = MatrixUtils.vectorize(matrix);
-					inputs[i][j] = scale(rawInputVector, 0, 255);
-				}
+		for(int i=0; i<allFilePaths.length; i++){
+			inputs[i] = new double[allFilePaths[i].length][];
+			for(int j=0; j<allFilePaths[i].length; j++){
+				inputs[i][j] = readFileVectorizeAndScale(allFilePaths[i][j]);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		
 		return inputs;
 	}
+	
+	/**
+	 * Read file from the <code>filePath</code>, store and scale (call <code>scale()</code>)
+	 * the data in a vector and return it.
+	 * @param filePath 
+	 * @return
+	 */
+	public abstract double[] readFileVectorizeAndScale(String filePath);
 	
 	/**
 	 * Scales data from 0 to 1 given <code>minValue</code> & <code>maxValue</code>.
@@ -109,7 +103,7 @@ public class ImageDataPreparer {
 	 * @param maxValue
 	 * @return
 	 */
-	private double[] scale(int[] vector, int minValue, int maxValue){
+	public double[] scale(int[] vector, int minValue, int maxValue){
 		double[] scaledVector = new double[vector.length];
 		
 		for(int i=0; i<vector.length; i++){
