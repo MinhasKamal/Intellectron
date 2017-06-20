@@ -1,4 +1,4 @@
-# Intellectron
+<h1><img src="https://user-images.githubusercontent.com/5456665/27328057-84566234-55d2-11e7-88ca-e4966a309633.png" height=24px width=auto/> Intellectron</h1>
 
 #### An Infant Library of Artificial Neural Network
 
