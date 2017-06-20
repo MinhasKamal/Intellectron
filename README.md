@@ -38,18 +38,32 @@ The project is a simple implementation of Deep Neural Network. Several machine l
 		// The 'DeepNeuralNetworkImplementation' object takes the network 
 		// structure, learning rate, and number of inputs (input categories).
 		DeepNeuralNetworkImplementation deepNeuralNetworkImplementation = 
-		    new DeepNeuralNetworkImplementation(numbersOfNeuronsInLayers, 0.1, 2);
+			new DeepNeuralNetworkImplementation(numbersOfNeuronsInLayers, 0.1, 2);
 		
 		// Here we are running 20,000 cycles to train the network.
 		// In each cycle we are passing the input and expected output.
+		System.out.println("# Training...\n");
 		int cycle = 20000;
 		for(int i=0; i<cycle; i++){
 			deepNeuralNetworkImplementation.train(inputs, expectedOutputs);
 		}
 		
 		// Storing knowledge in the memory storage
+		System.out.println("# Storing Knowledge...\n");
 		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
 		deepNeuralNetworkImplementation.dump(workspace+"knowledge.xml");
+		
+		// Predicting output for inputs from acquired knowledge
+		System.out.println("# Predicting...");
+		double prediction;
+		prediction = deepNeuralNetworkImplementation.predict(new double[]{0, 0})[0];
+		System.out.println("input- 0, 0; prediction- "+prediction);
+		prediction = deepNeuralNetworkImplementation.predict(new double[]{0, 1})[0];
+		System.out.println("input- 0, 1; prediction- "+prediction);
+		prediction = deepNeuralNetworkImplementation.predict(new double[]{1, 0})[0];
+		System.out.println("input- 1, 0; prediction- "+prediction);
+		prediction = deepNeuralNetworkImplementation.predict(new double[]{1, 1})[0];
+		System.out.println("input- 1, 1; prediction- "+prediction);
 	}
 ```
 
