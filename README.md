@@ -1,6 +1,6 @@
 # Intellectron
 
-#### An Innocent Library of Artificial Neural Network
+#### An Infant Library of Artificial Neural Network
 
 The project is a simple implementation of Deep Neural Network. Several machine learning algorithms are put together here. This tiny library is particularly suitable for small projects.
 
@@ -9,8 +9,8 @@ The project is a simple implementation of Deep Neural Network. Several machine l
 2. Now, use it in your project like this-
 
 ```
-  // This is a demonstration of XOR gate implementation in Neural Network.
-  public static void main(String[] args) {
+	// This is a demonstration of XOR gate implementation in Neural Network.
+	public static void main(String[] args) {
 		// For XOR gate-
 		// ------------------
 		// | input | output |
@@ -21,7 +21,7 @@ The project is a simple implementation of Deep Neural Network. Several machine l
 		// | 1 | 1 |   0    |
 		// ------------------
 		double[][] inputs = new double[][]{
-			{0, 0},	{0, 1},	{1, 0},	{1, 1}
+			{0, 0}, {0, 1}, {1, 0}, {1, 1}
 		};
 		double[][] expectedOutputs = new double[][]{
 			{0}, {1}, {1}, {0}
@@ -50,10 +50,10 @@ The project is a simple implementation of Deep Neural Network. Several machine l
 		// Storing knowledge in the memory storage
 		String workspace = System.getenv("SystemDrive") + System.getenv("HOMEPATH") + "\\Desktop\\";
 		deepNeuralNetworkImplementation.dump(workspace+"knowledge.xml");
-  }
+	}
 ```
 
-You can find some simple implementations in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a beautiful project- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer), which uses [Intellectron](https://github.com/MinhasKamal/Intellectron); you will get a nice insight from it too.
+You can find some simple implementations in the [test](https://github.com/MinhasKamal/Intellectron/tree/master/src/test) section. There is also a beautiful project created with Intellectron- [DeepGenderRecognizer](https://github.com/MinhasKamal/DeepGenderRecognizer); you will get a nice insight from it too.
 
 ### Releases
 - [Intellectron-V0.1.jar](https://github.com/MinhasKamal/Intellectron/releases/download/release/Intellectron-V0.1.jar)
