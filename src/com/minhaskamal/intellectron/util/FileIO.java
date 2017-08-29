@@ -1,9 +1,9 @@
-/****************************************************************************************************************
-* Developer: Minhas Kamal(BSSE-0509, IIT, DU)																	*
-* Date: 02-Feb-2014																								*
-* Modified: 31-Dec-2014																							*
-* Modified: 02-Apr-2016																							*
-****************************************************************************************************************/
+/***********************************************************
+* Developer: Minhas Kamal (minhaskamal024@gmail.com)       *
+* Date: 02-Feb-2014, 31-Dec-2014, 02-Apr-2016              *
+* Website: https://github.com/MinhasKamal/Intellectron     *
+* License: MIT License                                     *
+***********************************************************/
 
 package com.minhaskamal.intellectron.util;
 

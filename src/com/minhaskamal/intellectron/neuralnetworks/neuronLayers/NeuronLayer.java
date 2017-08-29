@@ -1,7 +1,7 @@
 /***********************************************************
 * Developer: Minhas Kamal (minhaskamal024@gmail.com)       *
 * Website: https://github.com/MinhasKamal/Intellectron     *
-* License:  GNU General Public License version-3           *
+* License: MIT License                                     *
 ***********************************************************/
 
 package com.minhaskamal.intellectron.neuralnetworks.neuronLayers;
